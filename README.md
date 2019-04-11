@@ -4,7 +4,7 @@
 ### Tema: Student support
 
 ### Članovi tima:
-- Ajna Zatrić  (vođa tima)
+- Ajna Zatrić    (vođa tima)
 - Ilma Lušija 
 - Maida Karamujić
 - Sara Halilović
