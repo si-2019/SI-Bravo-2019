@@ -11,6 +11,6 @@ app.use(CategoryRoutes);
 
 app.use(SendIssueRoutes);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 31902;
 
 app.listen(port, ()=> console.log(`Server started on port ${port}`));
