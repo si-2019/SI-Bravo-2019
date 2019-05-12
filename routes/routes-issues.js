@@ -1,4 +1,12 @@
 module.exports = (app, db) => {
+
+/**
+* @swagger
+* //issues/:
+*    get:
+*      description: Vraca response sa new, in progress i resolved nizovima issue-a 
+*/
+
     app.get('/issues', (req, res) => {
         db.issue.findAll().then((issues) => {
             const response = {};

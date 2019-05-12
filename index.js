@@ -2,6 +2,7 @@ const port = process.env.PORT || 31902;
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./models/db.js');
+const swaggerDoc = require('./swaggerDoc.js');
 
 db.sequelize.sync().then(function(){
 	console.log("Connection successful");
@@ -16,6 +17,8 @@ require('./routes/routes-issues')(app, db);
 require('./routes/routes-category')(app, db);
 require('./routes/routes-frequentIssue')(app, db);
 require('./routes/routes-messageInfo')(app, db);
+
+swaggerDoc(app);
 
 
 app.use("/*", (req, res, next)=> {
