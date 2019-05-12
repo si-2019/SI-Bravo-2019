@@ -1,13 +1,16 @@
+const port = process.env.PORT || 31902;
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
-const port = process.env.PORT || 31902;
+const db = require('./models/db.js');
 
-
-//modeli se kreiraju pri pokretanju aplikacije
-const db = require('./db.js')
-db.sequelize.sync({force:false}).then(function(){ 
+db.sequelize.sync().then(function(){
+	console.log("Connection successful");
+}).catch(function(err){
+	console.log("Connection failed");
+	console.log(err);
 });
+
+const app = express();
 
 require('./routes/routes-issues')(app, db);
 
@@ -26,7 +29,7 @@ app.post('/dodajNovuKategoriju',function(req, res){
 	var imeKategorije = req.query.naziv; 
 	
 	const novaKategorija = db.kategorija.build({
-		naziv: "Nihad"
+		naziv: imeKategorije
 	}).save();
 
 	
