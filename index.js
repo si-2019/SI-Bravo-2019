@@ -16,7 +16,7 @@ require('./routes/routes-issues')(app, db);
 
 app.get('/category/get', function(req, res) {
 	// let result = [];
-	 db.kategorija.findAll().then(project => {
+	 db.issueCategory.findAll().then(project => {
 		 console.log(project);
 		 res.send(project);
 		 
@@ -28,7 +28,7 @@ app.get('/category/get', function(req, res) {
 app.post('/dodajNovuKategoriju',function(req, res){
 	var imeKategorije = req.query.naziv; 
 	
-	const novaKategorija = db.kategorija.build({
+	const novaKategorija = db.issueCategory.build({
 		naziv: imeKategorije
 	}).save();
 
