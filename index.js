@@ -2,6 +2,7 @@ const port = process.env.PORT || 31902;
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./models/db.js');
+const swaggerDoc = require('./swaggerDoc.js');
 
 db.sequelize.sync().then(function(){
 	console.log("Connection successful");
@@ -34,6 +35,8 @@ app.post('/dodajNovuKategoriju',function(req, res){
 
 	
 });
+
+swaggerDoc(app);
 
 
 app.use("/*", (req, res, next)=> {
