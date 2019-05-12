@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
 		id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
-			primaryKey: true
+			primaryKey: true,
+			autoIncrement: true
 		},
 		status: {
 			type: DataTypes.STRING(255),
@@ -17,14 +18,6 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		procitalaSS: {
 			type: DataTypes.INTEGER(1),
-			allowNull: false
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-			allowNull: false
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
 			allowNull: false
 		},
 		issueID: {

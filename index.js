@@ -13,27 +13,9 @@ db.sequelize.sync().then(function(){
 const app = express();
 
 require('./routes/routes-issues')(app, db);
-
-app.get('/category/get', function(req, res) {
-	// let result = [];
-	 db.issueCategory.findAll().then(project => {
-		 console.log(project);
-		 res.send(project);
-		 
-	 });
-
-});
-
-
-app.post('/dodajNovuKategoriju',function(req, res){
-	var imeKategorije = req.query.naziv; 
-	
-	const novaKategorija = db.issueCategory.build({
-		naziv: imeKategorije
-	}).save();
-
-	
-});
+require('./routes/routes-category')(app, db);
+require('./routes/routes-frequentIssue')(app, db);
+require('./routes/routes-messageInfo')(app, db);
 
 
 app.use("/*", (req, res, next)=> {
