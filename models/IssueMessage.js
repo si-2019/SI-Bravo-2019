@@ -1,11 +1,14 @@
 /* jshint indent: 1 */
+var Sequelize = require("sequelize");
+
 
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('IssueMessage', {
 		id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
-			primaryKey: true
+			primaryKey: true,
+			autoIncrement: true
 		},
 		tekst: {
 			type: DataTypes.STRING(255),
@@ -13,16 +16,10 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		datum: {
 			type: DataTypes.DATE,
-			allowNull: false
+			allowNull: false,
+			defaultValue: Sequelize.NOW 
 		},
-		createdAt: {
-			type: DataTypes.DATE,
-			allowNull: false
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
-			allowNull: false
-		},
+		
 		messageID: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true,

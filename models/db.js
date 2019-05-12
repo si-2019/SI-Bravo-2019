@@ -11,8 +11,8 @@ db.sequelize = sequelize;
 //import modela
 db.issue = sequelize.import(__dirname+'/Issue.js');
 db.issueCategory = sequelize.import(__dirname+'/IssueCategory.js');
-db.frequentIssue = sequelize.import(__dirname+'/IssueMessage.js');
-db.issueMessage = sequelize.import(__dirname+'/FrequentIssue.js');
+db.frequentIssue = sequelize.import(__dirname+'/FrequentIssue.js');
+db.issueMessage = sequelize.import(__dirname+'/IssueMessage.js');
 db.korisnik = sequelize.import(__dirname+'/Korisnik.js');
 
 module.exports=db;

@@ -5,7 +5,8 @@ module.exports = function(sequelize, DataTypes) {
 		id: {
 			type: DataTypes.INTEGER(11),
 			allowNull: false,
-			primaryKey: true
+			primaryKey: true,
+			autoIncrement: true
 		},
 		naziv: {
 			type: DataTypes.STRING(255),
@@ -13,14 +14,6 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		tekst: {
 			type: DataTypes.STRING(255),
-			allowNull: false
-		},
-		createdAt: {
-			type: DataTypes.DATE,
-			allowNull: false
-		},
-		updatedAt: {
-			type: DataTypes.DATE,
 			allowNull: false
 		}
 	}, {
