@@ -8,16 +8,24 @@ module.exports = (app, db) => {
 */
 
     app.get('/issues', (req, res) => {
-        db.issue.findAll().then((issues) => {
+        res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+
+        db.issue.findAll({
+            include:[
+                {
+                    model: db.issueMessage,
+                    as:'messages',
+                    //through: {attributes: []},
+                }] }).then((issues) => {
             const response = {};
             response.new = issues.filter((issue) => {
-                return issue.issueStatus === 'new';
+                return issue.status === 'new';
             });
             response.inProgress = issues.filter((issue) => {
-                return issue.issueStatus === 'inProgress';
+                return issue.status === 'inProgress';
             });
             response.resolved = issues.filter((issue) => {
-                return issue.issueStatus === 'resolved';
+                return issue.status === 'resolved';
             })
             res.send(response);
         }).catch((err) => {

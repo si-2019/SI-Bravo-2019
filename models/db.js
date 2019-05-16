@@ -15,4 +15,6 @@ db.frequentIssue = sequelize.import(__dirname+'/FrequentIssue.js');
 db.issueMessage = sequelize.import(__dirname+'/IssueMessage.js');
 db.korisnik = sequelize.import(__dirname+'/Korisnik.js');
 
+db.issue.hasMany(db.issueMessage, { foreignKey: 'messageID', as: 'messages'});
+
 module.exports=db;
