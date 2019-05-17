@@ -27,6 +27,11 @@ module.exports = function(sequelize, DataTypes) {
 				model: 'Issue',
 				key: 'id'
 			}
+		},
+
+		ocjenaPoruke: {
+			type: DataTypes.INTEGER(11),
+			allowNull: true
 		}
 	}, {
 		tableName: 'IssueMessage'
