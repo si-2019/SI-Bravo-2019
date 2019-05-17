@@ -16,5 +16,7 @@ db.issueMessage = sequelize.import(__dirname+'/IssueMessage.js');
 db.korisnik = sequelize.import(__dirname+'/Korisnik.js');
 
 db.issue.hasMany(db.issueMessage, { foreignKey: 'messageID', as: 'messages'});
+db.issueCategory.hasMany(db.issue, {foreignKey: 'issueID', as: 'categories'});
+db.korisnik.hasMany(db.issue, {foreignKey: 'StudentID', as: 'user'});
 
 module.exports=db;
