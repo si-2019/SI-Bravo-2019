@@ -21,13 +21,15 @@ module.exports = (app, db) => {
 
         let issueID = req.query.issueID;
         let messageTekst = req.query.tekst;
+        let ocjenaPoruke = req.query.ocjenaPoruke;
         
         console.log(issueID);
 
         const novaPoruka = db.issueMessage.build({
             
             issueID: issueID,
-            tekst: messageTekst
+            tekst: messageTekst,
+            ocjenaPoruke: ocjenaPoruke
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});
     }); 
 }
