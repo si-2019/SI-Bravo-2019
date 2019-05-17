@@ -7,7 +7,7 @@ module.exports = (app, db) => {
 *      description: Vraca response sa new, in progress i resolved nizovima issue-a 
 */
 
-    app.get('/issues', (req, res) => {
+    app.get('/issues/get', (req, res) => {
         res.header("Access-Control-Allow-Origin", "http://localhost:3000");
 
         db.issue.findAll({
@@ -19,7 +19,7 @@ module.exports = (app, db) => {
                 }] }).then((issues) => {
             const response = {};
             response.new = issues.filter((issue) => {
-                return issue.status === 'new';
+                return issue.status === 'new' || issue.status === 'New';
             });
             response.inProgress = issues.filter((issue) => {
                 return issue.status === 'inProgress';
@@ -32,4 +32,22 @@ module.exports = (app, db) => {
             throw err; // handle
         });
     })
+
+    app.post('/issues/add',function(req, res){
+
+        var status = req.query.status; 
+        let procitaoStudnet = req.query.procitaoStudent;
+        let procitalaSS = req.query.procitalaSS;
+        let categoryID = req.query.categoryID;
+        let studentID = req.query.studentID;
+
+        const novaKategorija = db.issue.build({
+            
+            status: status,
+            procitaoStudent: procitaoStudnet,
+            procitalaSS: procitalaSS,
+            categoryID: categoryID,
+            StudentID: studentID
+        }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
+    });
 }

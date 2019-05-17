@@ -17,7 +17,7 @@ module.exports = (app, db) => {
         });
     });
 
-  /*  app.post('/message/add', (req,res) => {
+    app.post('/message/add', (req,res) => {
 
         let issueID = req.query.issueID;
         let messageTekst = req.query.tekst;
@@ -26,8 +26,8 @@ module.exports = (app, db) => {
 
         const novaPoruka = db.issueMessage.build({
             
-            messageID: issueID,
+            issueID: issueID,
             tekst: messageTekst
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});
-    }); */
+    }); 
 }

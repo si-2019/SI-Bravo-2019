@@ -19,22 +19,6 @@ module.exports = function(sequelize, DataTypes) {
 		procitalaSS: {
 			type: DataTypes.INTEGER(1),
 			allowNull: false
-		},
-		issueID: {
-			type: DataTypes.INTEGER(11),
-			allowNull: true,
-			references: {
-				model: 'IssueCategory',
-				key: 'id'
-			}
-		},
-		StudentID: {
-			type: DataTypes.INTEGER(11),
-			allowNull: true,
-			references: {
-				model: 'Korisnik',
-				key: 'id'
-			}
 		}
 	}, {
 		tableName: 'Issue'
