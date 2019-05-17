@@ -1,27 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const db = require('../db.js')
+module.exports = (app, db) => {
 
-router.post('/issue/send', function(req, res){
-
-    if(req.body.issueText.length == 0) res.send("Upišite sadržaj poruke");
-
-    //Prvo pronaći id kategorije u tabeli Category
-    db.query("SELECT id FROM Category WHERE DisplayName = '" + req.body.issueTitle + "';", function (err, result, fields){
-        if(err) throw err;
-        id = parseInt(result[result.length-1]['id']);
-        id.toString();
-
-        //Sada kad smo nasli id kategorije, trazimo id studenta
-        //Međutim, pošto još uvijek nemamo login gotov, hardkodirat ćemo id studenta
-
-        db.query("INSERT INTO Issue (idStudent, idCategory, issueStatus, message) VALUES (1, " + id + ", 'new', '" + req.body.issueText + "');", function (err, result, fields) {
-            if (err) throw err;
-            res.send("Uspjesno poslan issue!");
-        });
-    })
-
-});  		
-
-module.exports = router; 
-
+    app.post('/issue/send',function(req, res){
+        db.issueCategory.findOne({where:{naziv:req.query.issueTitle}}).then(kategorija => {
+            const noviIssue = db.issue.build({
+                status: "new",
+                procitaoStudent: false,
+                procitalaSS: false,
+                categoryID: kategorija.id,
+                studentID: "1"
+            }).save().then(x => {
+                const noviMessage = db.issueMessage.build({
+                tekst: req.query.issueText,
+                datum: new Date(),
+                issueID: x.id
+            }).save().then(x => {res.send("Uspjesan upis!")});    
+        }).catch(error => res.send(error))});
+    });
+}
