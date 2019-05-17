@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./models/db.js');
 const swaggerDoc = require('./swaggerDoc.js');
+var cors = require("cors");
 
 db.sequelize.sync().then(function(){
 	console.log("Connection successful");
@@ -12,6 +13,8 @@ db.sequelize.sync().then(function(){
 });
 
 const app = express();
+
+app.use(cors());
 
 require('./routes/routes-issues')(app, db);
 require('./routes/routes-category')(app, db);

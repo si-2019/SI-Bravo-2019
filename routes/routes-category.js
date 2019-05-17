@@ -1,12 +1,11 @@
-
+﻿
 module.exports = (app, db) => {
     
     app.get('/category/get', function(req, res) {
         
          db.issueCategory.findAll().then(rezultat => {
-             console.log(rezultat);
              res.send(rezultat);             
-         }).catch(error => res.send("Greška prilikom citanja iz baze!"));
+         }).catch(error => res.send("Greška prilikom čitanja iz baze!"));
     
     });
 
