@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
 			defaultValue: Sequelize.NOW 
 		},
 		
-		messageID: {
+		issueID: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true,
 			references: {
