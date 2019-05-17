@@ -8,7 +8,7 @@ module.exports = (app, db) => {
 
             const response = {};
             response.svePoruke = messages.filter((message) => {
-                return message.issueID === issueID;
+                return message.issueID == issueID;
             });
             
             res.send(response);
