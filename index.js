@@ -16,6 +16,8 @@ const app = express();
 
 app.use(cors());
 
+app.use(bodyParser.json());
+
 require('./routes/routes-issues')(app, db);
 require('./routes/routes-category')(app, db);
 require('./routes/routes-frequentIssue')(app, db);

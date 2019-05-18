@@ -10,12 +10,19 @@ module.exports = (app, db) => {
     });
 
     app.post('/category/add',function(req, res){
+        var imeKategorije = req.body.naziv; 
 
-        var imeKategorije = req.query.naziv; 
-        console.log(imeKategorije);
-        const novaKategorija = db.issueCategory.build({
-            
-            naziv: imeKategorije
-        }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
+        db.issueCategory.count({ where: { naziv: 'Indeksi'} }).then(count => {
+            if (count != 0){
+                console.log("postoji")
+                res.send("Category already exists!")
+            }
+            else{
+                const novaKategorija = db.issueCategory.build({
+                    naziv: imeKategorije
+                }).save().then(x => res.send("Successfully added category!")).catch(error => { res.send(error)});   
+            }
+        });
+          
     });
 }
