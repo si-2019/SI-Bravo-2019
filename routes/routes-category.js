@@ -13,7 +13,6 @@ module.exports = (app, db) => {
 
         var imeKategorije = req.query.naziv; 
         const novaKategorija = db.issueCategory.build({
-            
             naziv: imeKategorije
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
     });
