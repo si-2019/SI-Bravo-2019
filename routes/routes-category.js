@@ -12,10 +12,16 @@ module.exports = (app, db) => {
     app.post('/category/add',function(req, res){
 
         var imeKategorije = req.query.naziv; 
-        console.log(imeKategorije);
         const novaKategorija = db.issueCategory.build({
             
             naziv: imeKategorije
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
     });
+
+    app.get('/category/get/:categoryId', (req, res) => {
+        const categoryID = req.params.categoryId;
+        db.issueCategory.findOne({where: {id: categoryID}}).then((category) => {
+            res.send((category));
+        }).catch((err) => console.log(err));
+    })
 }
