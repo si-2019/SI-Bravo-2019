@@ -11,10 +11,10 @@ module.exports = (app, db) => {
 
     app.post('/category/add',function(req, res){
         var imeKategorije = req.body.naziv; 
-
-        db.issueCategory.count({ where: { naziv: 'Indeksi'} }).then(count => {
+        console.log(imeKategorije)
+        
+        db.issueCategory.count({ where: { naziv: imeKategorije} }).then(count => {
             if (count != 0){
-                console.log("postoji")
                 res.send("Category already exists!")
             }
             else{
