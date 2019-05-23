@@ -33,6 +33,9 @@ module.exports = (app, db) => {
 
     
         app.post('/issues/draft/add',function(req, res){
+            
+            if(req.body.issueTitle == '') 
+            res.send("No title! Please choose title!")
 
             db.issueCategory.findOne({where:{naziv: req.body.issueTitle}}).then(function(category){ 
 
