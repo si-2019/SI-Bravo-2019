@@ -50,4 +50,9 @@ module.exports = (app, db) => {
             StudentID: studentID
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
     });
+
+  
+
+
 }
+

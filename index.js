@@ -1,4 +1,4 @@
-const port = process.env.PORT || 31902;
+const port = process.env.PORT || 31111;
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./models/db.js');
@@ -23,6 +23,7 @@ require('./routes/routes-category')(app, db);
 require('./routes/routes-frequentIssue')(app, db);
 require('./routes/routes-messageInfo')(app, db);
 require('./routes/routes-sendIssue')(app, db);
+require('./routes/routes-draft')(app, db);
 
 swaggerDoc(app);
 

@@ -32,6 +32,11 @@ module.exports = function(sequelize, DataTypes) {
 		ocjenaPoruke: {
 			type: DataTypes.INTEGER(11),
 			allowNull: true
+		},
+
+		draftStatus: {
+			type: DataTypes.BOOLEAN(0),
+			allowNull: false,
 		}
 	}, {
 		tableName: 'IssueMessage'
