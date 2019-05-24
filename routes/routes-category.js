@@ -12,7 +12,7 @@ module.exports = (app, db) => {
     app.post('/category/add',function(req, res){
         var imeKategorije = req.body.naziv; 
         console.log(imeKategorije)
-        
+
         db.issueCategory.count({ where: { naziv: imeKategorije} }).then(count => {
             if (count != 0){
                 res.send("Category already exists!")
@@ -25,4 +25,11 @@ module.exports = (app, db) => {
         });
           
     });
+
+    app.get('/category/get/:categoryId', (req, res) => {
+        const categoryID = req.params.categoryId;
+        db.issueCategory.findOne({where: {id: categoryID}}).then((category) => {
+            res.send((category));
+        }).catch((err) => console.log(err));
+    })
 }
