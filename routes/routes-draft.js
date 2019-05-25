@@ -25,10 +25,10 @@ module.exports = (app, db) => {
                     return issue.status === 'new' && issue.draftStatus == true;
                 });
                 response.inProgress = issues.filter((issue) => {
-                    return issue.status === 'inProgress' && issue.draftStatus == true;;
+                    return issue.status === 'inProgress' && issue.draftStatus == true;
                 });
                 response.resolved = issues.filter((issue) => {
-                    return issue.status === 'resolved' && issue.draftStatus == true;;
+                    return issue.status === 'resolved' && issue.draftStatus == true;
                 })
                 res.send(response);
             }).catch((err) => {
