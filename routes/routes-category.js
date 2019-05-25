@@ -3,9 +3,9 @@ module.exports = (app, db) => {
     
     app.get('/category/get', function(req, res) {
         
-         db.issueCategory.findAll().then(rezultat => {
-             res.send(rezultat);             
-         }).catch(error => res.send("Greška prilikom čitanja iz baze!"));
+        db.issueCategory.findAll().then(rezultat => {
+            res.send(rezultat);             
+        }).catch(error => res.send("Greška prilikom čitanja iz baze!"));
     
     });
 
