@@ -9,6 +9,7 @@ module.exports = (app, db) => {
     
 
         // OVU RUTU TREBA PREPRAVITI, NIJE JOŠ GOTOVA ---> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
         app.get('/issues/draft/get', (req, res) => {
             res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     
@@ -17,20 +18,23 @@ module.exports = (app, db) => {
                     {
                         model: db.issueMessage,
                         as:'messages',
-                    }] 
-            }).then((issues) => {
+                        //through: {attributes: []},
+                    }] }).then((issues) => {
                 const response = {};
-                response.drafts = issues.filter((issue) => {
-                    return issue.draftStatus == '1';
+                response.new = issues.filter((issue) => {
+                    return issue.status === 'new' && issue.draftStatus == true;
                 });
-                
+                response.inProgress = issues.filter((issue) => {
+                    return issue.status === 'inProgress' && issue.draftStatus == true;;
+                });
+                response.resolved = issues.filter((issue) => {
+                    return issue.status === 'resolved' && issue.draftStatus == true;;
+                })
                 res.send(response);
-
             }).catch((err) => {
                 throw err; // handle
             });
         })
-
     
         app.post('/issues/draft/add',function(req, res){
             
@@ -45,6 +49,7 @@ module.exports = (app, db) => {
                     procitalaSS: req.body.procitalaSS, 
                     categoryID: category.id, 
                     StudentID: 1, 
+                    draftStatus: 1,
                 }).then(function(issue){
                         db.issueMessage.create({
                             tekst: req.body.issueText,

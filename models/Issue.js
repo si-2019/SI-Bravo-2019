@@ -19,6 +19,10 @@ module.exports = function(sequelize, DataTypes) {
 		procitalaSS: {
 			type: DataTypes.INTEGER(1),
 			allowNull: false
+		},
+		draftStatus: {
+			type: DataTypes.BOOLEAN(0),
+			allowNull: false
 		}
 	}, {
 		tableName: 'Issue'

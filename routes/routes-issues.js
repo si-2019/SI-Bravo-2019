@@ -19,13 +19,13 @@ module.exports = (app, db) => {
                 }] }).then((issues) => {
             const response = {};
             response.new = issues.filter((issue) => {
-                return issue.status === 'new' || issue.status === 'New';
+                return issue.status === 'new' && issue.draftStatus == false || issue.status === 'New' && issue.draftStatus == false;;
             });
             response.inProgress = issues.filter((issue) => {
-                return issue.status === 'inProgress';
+                return issue.status === 'inProgress' && issue.draftStatus == false;;
             });
             response.resolved = issues.filter((issue) => {
-                return issue.status === 'resolved';
+                return issue.status === 'resolved' && issue.draftStatus == false;;
             })
             res.send(response);
         }).catch((err) => {
