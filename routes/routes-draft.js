@@ -22,13 +22,13 @@ module.exports = (app, db) => {
                     }] }).then((issues) => {
                 const response = {};
                 response.new = issues.filter((issue) => {
-                    return issue.status === 'new' && issue.draftStatus == true;
+                    return issue.status === 'new' && issue.draftStatus == true && issue.trashStudent == 0;
                 });
                 response.inProgress = issues.filter((issue) => {
-                    return issue.status === 'inProgress' && issue.draftStatus == true;
+                    return issue.status === 'inProgress' && issue.draftStatus == true && issue.trashStudent == 0;
                 });
                 response.resolved = issues.filter((issue) => {
-                    return issue.status === 'resolved' && issue.draftStatus == true;
+                    return issue.status === 'resolved' && issue.draftStatus == true && issue.trashStudent == 0;
                 })
                 res.send(response);
             }).catch((err) => {
@@ -64,6 +64,9 @@ module.exports = (app, db) => {
             });
 
         })
+
+    
+    
     }
     
     

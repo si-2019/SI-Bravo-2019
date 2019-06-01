@@ -24,6 +24,7 @@ require('./routes/routes-frequentIssue')(app, db);
 require('./routes/routes-messageInfo')(app, db);
 require('./routes/routes-sendIssue')(app, db);
 require('./routes/routes-draft')(app, db);
+require('./routes/routes-archived')(app, db);
 
 swaggerDoc(app);
 
