@@ -47,21 +47,18 @@ module.exports = (app, db) => {
             db.issue.update(
                 {trashStudent: trashStudent, trashSS: trashSS},
                 {where: {id: id} }
-            )
-            .then((result) => {
-                console.log(result);
-                // [ 1 ]
+               
+            ).then(result => {
+                res.send("Successfully");
             });
             
         });
 
         app.put('/issues/archived/delete', function(req, res){
-            console.log("usao u delete")
             db.issue.update(
                 {trashStudent: req.body.trashStudent, trashSS: req.body.trashSS},
                 {where: {id: req.body.id}}
-            )
-            .then((result)=>{
+            ).then((result)=>{
                 res.send("Empty!")
             });
         });
