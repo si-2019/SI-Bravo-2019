@@ -19,13 +19,13 @@ module.exports = (app, db) => {
                 }] }).then((issues) => {
             const response = {};
             response.new = issues.filter((issue) => {
-                return issue.status === 'new' && issue.draftStatus == false || issue.status === 'New' && issue.draftStatus == false;
+                return issue.status === 'new' && issue.draftStatus == false && issue.trashStudent == 0 || issue.status === 'New' && issue.draftStatus == false && issue.trashStudent == 0;
             });
             response.inProgress = issues.filter((issue) => {
-                return issue.status === 'inProgress' && issue.draftStatus == false;
+                return issue.status === 'inProgress' && issue.draftStatus == false && issue.trashStudent == 0;
             });
             response.resolved = issues.filter((issue) => {
-                return issue.status === 'resolved' && issue.draftStatus == false;
+                return issue.status === 'resolved' && issue.draftStatus == false && issue.trashStudent == 0;
             })
             res.send(response);
         }).catch((err) => {
@@ -51,6 +51,8 @@ module.exports = (app, db) => {
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
     });
 
+    
+    
   
 
 

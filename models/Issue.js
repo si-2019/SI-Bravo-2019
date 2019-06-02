@@ -23,6 +23,14 @@ module.exports = function(sequelize, DataTypes) {
 		draftStatus: {
 			type: DataTypes.BOOLEAN(0),
 			allowNull: false
+		},
+		trashStudent: {
+			type: DataTypes.INTEGER(3),
+			allowNull: false
+		},
+		trashSS: {
+			type: DataTypes.INTEGER(3),
+			allowNull: false
 		}
 	}, {
 		tableName: 'Issue'
