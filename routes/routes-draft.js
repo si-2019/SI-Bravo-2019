@@ -42,7 +42,6 @@ module.exports = (app, db) => {
             res.send("No title! Please choose title!")
 
             db.issueCategory.findOne({where:{naziv: req.body.issueTitle}}).then(function(category){ 
-
                 db.issue.create({
                     status: 'new', 
                     procitaoStudent: req.body.procitaoStudent, 
@@ -50,7 +49,10 @@ module.exports = (app, db) => {
                     categoryID: category.id, 
                     StudentID: 1, 
                     draftStatus: 1,
+                    trashStudent:0,
+                    trashSS: 0
                 }).then(function(issue){
+
                         db.issueMessage.create({
                             tekst: req.body.issueText,
                             issueID: issue.id,
@@ -64,6 +66,15 @@ module.exports = (app, db) => {
             });
 
         })
+
+        app.delete('/issues/draft/delete',function(req, res){
+
+            db.issue.destroy({where: {id: req.query.id}}
+                ).then(function(issue){
+                    db.issueMessage.destroy({where: {issueID: null}}).then(res.sendStatus(200));
+                })
+            
+        });
 
     
     
