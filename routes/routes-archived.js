@@ -7,7 +7,7 @@ module.exports = (app, db) => {
     *      description: Kada se poruka u Track Issues dijelu arhivira, ona prelazi u folder Archived
     */
     
-        // OVU RUTU TREBA PREPRAVITI, NIJE JOŠ GOTOVA ---> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
 
         app.get('/issues/archived/get', (req, res) => {
             res.header("Access-Control-Allow-Origin", "http://localhost:3000");
