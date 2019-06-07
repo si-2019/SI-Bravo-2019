@@ -4,15 +4,17 @@ module.exports = (app, db) => {
         db.issueCategory.findOne({where:{naziv:req.query.issueTitle}}).then(kategorija => {
             const noviIssue = db.issue.build({
                 status: "new",
-                procitaoStudent: false,
+                procitaoStudent: true,
                 procitalaSS: false,
                 categoryID: kategorija.id,
-                studentID: "1"
+                studentID: "1",
+                draftStatus: 0
             }).save().then(x => {
                 const noviMessage = db.issueMessage.build({
                 tekst: req.query.issueText,
                 datum: new Date(),
-                issueID: x.id
+                issueID: x.id,
+                draftStatus: 0
             }).save().then(x => {res.send("Uspjesan upis!")});    
         }).catch(error => res.send(error))});
     });
@@ -22,14 +24,16 @@ module.exports = (app, db) => {
             const noviIssue = db.issue.build({
                 status: "new",
                 procitaoStudent: false,
-                procitalaSS: false,
+                procitalaSS: true,
                 categoryID: kategorija.id,
-                studentID: "1"
+                studentID: "1",
+                draftStatus: 0
             }).save().then(x => {
                 const noviMessage = db.issueMessage.build({
                 tekst: req.query.issueText,
                 datum: new Date(),
-                issueID: x.id
+                issueID: x.id,
+                draftStatus: 0
             }).save().then(x => {res.send("Uspjesan upis!")});    
         }).catch(error => res.send(error))});
     });
