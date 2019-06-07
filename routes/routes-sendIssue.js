@@ -7,7 +7,7 @@ module.exports = (app, db) => {
                 procitaoStudent: true,
                 procitalaSS: false,
                 categoryID: kategorija.id,
-                studentID: 1,
+                StudentID: 1,
                 draftStatus: 0
             }).save().then(x => {
                 const noviMessage = db.issueMessage.build({
@@ -26,7 +26,7 @@ module.exports = (app, db) => {
                 procitaoStudent: false,
                 procitalaSS: true,
                 categoryID: kategorija.id,
-                studentID: 1,
+                StudentID: 1,
                 draftStatus: 0
             }).save().then(x => {
                 const noviMessage = db.issueMessage.build({
