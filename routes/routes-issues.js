@@ -32,7 +32,8 @@ module.exports = (app, db) => {
             throw err; // handle
         });
     })
-
+ 
+    
     app.post('/issues/add',function(req, res){
 
         var status = req.query.status; 
@@ -49,6 +50,20 @@ module.exports = (app, db) => {
             categoryID: categoryID,
             StudentID: studentID
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
+    });
+    app.put('/issues/reslove',function(req, res, next){
+
+        
+        let id = req.body.idIssue;
+
+        db.issue.update(
+            {status:'resolved'},
+            {where: {id: id} }
+           
+        ).then(result => {
+            res.send("Successfully");
+        });
+        
     });
 
     
