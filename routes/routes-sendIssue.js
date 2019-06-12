@@ -16,6 +16,7 @@ module.exports = (app, db) => {
                 tekst: req.query.issueText,
                 datum: new Date(),
                 issueID: x.id,
+                ocjenaPoruke:0,
                 draftStatus: 0
             }).save().then(x => {res.send("Uspjesan upis!")});    
         }).catch(error => res.send(error))});

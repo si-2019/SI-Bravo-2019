@@ -27,7 +27,11 @@ module.exports = (app, db) => {
             response.resolved = issues.filter((issue) => {
                 return issue.status === 'resolved' && issue.draftStatus == false && issue.trashStudent == 0;
             })
+
+            console.log(response.new)
+
             res.send(response);
+
         }).catch((err) => {
             throw err; // handle
         });
@@ -47,7 +51,12 @@ module.exports = (app, db) => {
             procitaoStudent: procitaoStudnet,
             procitalaSS: procitalaSS,
             categoryID: categoryID,
-            StudentID: studentID
+            StudentID: studentID,
+            datum: new Date(),
+            draftStatus: 0,
+            trashStudent: 0,
+            trashSS: 0,
+            datum: new Date()
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
     });
 

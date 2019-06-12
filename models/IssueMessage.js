@@ -31,7 +31,8 @@ module.exports = function(sequelize, DataTypes) {
 
 		ocjenaPoruke: {
 			type: DataTypes.INTEGER(11),
-			allowNull: true
+			allowNull: true,
+			defaultValue: 0
 		},
 
 		draftStatus: {
