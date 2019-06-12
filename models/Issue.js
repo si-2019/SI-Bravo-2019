@@ -1,4 +1,5 @@
 /* jshint indent: 1 */
+var Sequelize = require("sequelize");
 
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Issue', {
@@ -31,6 +32,11 @@ module.exports = function(sequelize, DataTypes) {
 		trashSS: {
 			type: DataTypes.INTEGER(3),
 			allowNull: false
+		},
+		datum: {
+			type: DataTypes.DATE,
+			allowNull: false,
+			defaultValue: Sequelize.NOW 
 		}
 	}, {
 		tableName: 'Issue'

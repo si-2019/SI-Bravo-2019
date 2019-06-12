@@ -8,7 +8,16 @@ module.exports = (app, db) => {
             issueID: req.body.issueID,
             ocjenaPoruke:0,
             draftStatus: 0
-        }).save().then(x => {res.send("Uspjesan upis!")});   
+        })
+        .save()
+        .then(
+            db.issue.update(
+                {datum: new Date()},
+                {where: {id: req.body.issueID}}
+            ).then((result)=>{
+                res.send("Uspjesan upis!")
+            })
+        );   
     });
 
     app.post('/issue/reply/SS',function(req, res){
