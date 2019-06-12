@@ -67,6 +67,37 @@ module.exports = (app, db) => {
 
         })
 
+        app.post('/issues/draft/add/ss',function(req, res){
+            
+            if(req.body.issueTitle == '') 
+            res.send("No title! Please choose title!")
+
+            db.issueCategory.findOne({where:{naziv: req.body.issueTitle}}).then(function(category){ 
+                db.issue.create({
+                    status: 'new', 
+                    procitaoStudent: req.body.procitaoStudent, 
+                    procitalaSS: req.body.procitalaSS, 
+                    categoryID: category.id, 
+                    StudentID: null, 
+                    draftStatus: 1,
+                    trashStudent:0,
+                    trashSS: 0
+                }).then(function(issue){
+
+                        db.issueMessage.create({
+                            tekst: req.body.issueText,
+                            issueID: issue.id,
+                            ocjenaPoruke: 1,
+                            draftStatus: 1
+                        }).then(function(j){
+                                res.send("Successfully saved issue as draft!");
+                            }).catch(error => { res.send(error)})
+                }).catch(error => { res.send(error)})
+          
+            });
+
+        })
+
         app.delete('/issues/draft/delete',function(req, res){
 
             db.issue.destroy({where: {id: req.query.id}}

@@ -28,7 +28,7 @@ module.exports = (app, db) => {
                 return issue.status === 'resolved' && issue.draftStatus == false && issue.trashStudent == 0;
             })
 
-            console.log(response.new)
+            
 
             res.send(response);
 
