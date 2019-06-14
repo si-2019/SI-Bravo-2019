@@ -47,6 +47,7 @@ require('./routes/routes-sendIssue')(app, db);
 require('./routes/routes-draft')(app, db);
 require('./routes/routes-archived')(app, db);
 require('./routes/routes-reply')(app, db);
+require('./routes/routes-user')(app, db);
 
 swaggerDoc(app);
 
