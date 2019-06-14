@@ -32,7 +32,7 @@ module.exports = (app, db) => {
                     procitaoStudent: false,
                     procitalaSS: true,
                     categoryID: kategorija.id,
-                    StudentID: 1,
+                    StudentID: student.id,
                     draftStatus: 0,
                     trashStudent: 0,
                     trashSS: 0
