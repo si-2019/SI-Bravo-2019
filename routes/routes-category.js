@@ -1,7 +1,9 @@
-﻿
+﻿const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
+
 module.exports = (app, db) => {
     
-    app.get('/category/get', function(req, res) {
+    app.get('/category/get',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res) {
         
         db.issueCategory.findAll().then(rezultat => {
             res.send(rezultat);             
@@ -9,7 +11,7 @@ module.exports = (app, db) => {
     
     });
 
-    app.post('/category/add',function(req, res){
+    app.post('/category/add', Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
         var imeKategorije = req.body.naziv; 
         console.log(imeKategorije)
 
@@ -26,7 +28,7 @@ module.exports = (app, db) => {
           
     });
 
-    app.get('/category/get/:categoryId', (req, res) => {
+    app.get('/category/get/:categoryId', Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), (req, res) => {
         const categoryID = req.params.categoryId;
         db.issueCategory.findOne({where: {id: categoryID}}).then((category) => {
             res.send((category));

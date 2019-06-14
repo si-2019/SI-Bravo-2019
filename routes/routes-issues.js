@@ -1,3 +1,6 @@
+const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
+
 module.exports = (app, db) => {
 
 /**
@@ -7,8 +10,8 @@ module.exports = (app, db) => {
 *      description: Vraca response sa new, in progress i resolved nizovima issue-a 
 */
 
-    app.get('/issues/get', (req, res) => {
-        res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    app.get('/issues/get', Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), (req, res) => {
+        // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
 
         db.issue.findAll({
             include:[
@@ -38,7 +41,7 @@ module.exports = (app, db) => {
     })
  
     
-    app.post('/issues/add',function(req, res){
+    app.post('/issues/add',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
 
         var status = req.query.status; 
         let procitaoStudnet = req.query.procitaoStudent;
@@ -60,7 +63,7 @@ module.exports = (app, db) => {
             datum: new Date()
         }).save().then(x => res.send("Uspjesan upis!")).catch(error => { res.send(error)});     
     });
-    app.put('/issues/reslove',function(req, res, next){
+    app.put('/issues/reslove',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res, next){
 
         
         let id = req.body.idIssue;
