@@ -6,9 +6,9 @@ var app = require('../index');
 chai.use(chaiHttp);
 chai.should();
 
-describe("vracanje svih faq", () => {
+describe("Vraca niz svih ucestalih upita! ", () => {
     describe("GET /faq", () => {
-        it ("treba vratit niz", (done) => {
+        it ("Vraca niz svih FAQ", (done) => {
             chai.request(app)
                 .get('/frequentIssue/get')
                 .end((err, res) => {

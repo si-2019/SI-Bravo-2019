@@ -6,9 +6,9 @@ var app = require('../index');
 chai.use(chaiHttp);
 chai.should();
 
-describe("kreiranje novog faq", () => {
+describe("Kreiranje novog faq", () => {
     describe("POST /", () => {
-        it ("treba vratiti objekat, 200,poruku Uspjesan upis!", (done) => {
+        it ("Nakon upisa vraća objekat,poruku 'Uspjesan upis!',200", (done) => {
             const faq = {
                
                 naziv: "Unit test",
