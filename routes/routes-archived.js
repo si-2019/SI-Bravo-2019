@@ -1,3 +1,6 @@
+const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
+
 module.exports = (app, db) => {
 
     /**
@@ -9,8 +12,10 @@ module.exports = (app, db) => {
     
         // OVU RUTU TREBA PREPRAVITI, NIJE JOŠ GOTOVA ---> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-        app.get('/issues/archived/get', (req, res) => {
-            res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+        app.get('/issues/archived/get', 
+            Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), 
+        (req, res) => {
+            // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     
             db.issue.findAll({
                 include:[
@@ -38,7 +43,9 @@ module.exports = (app, db) => {
         })
 
 
-        app.put('/issues/archived/add',function(req, res, next){
+        app.put('/issues/archived/add',
+            Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA])
+        ,function(req, res, next){
 
             let trashStudent = req.body.trashStudent;
             let trashSS = req.body.trashSS;
@@ -54,7 +61,9 @@ module.exports = (app, db) => {
             
         });
 
-        app.put('/issues/archived/delete', function(req, res){
+        app.put('/issues/archived/delete',
+        Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), 
+        function(req, res){
             db.issue.update(
                 {trashStudent: req.body.trashStudent, trashSS: req.body.trashSS},
                 {where: {id: req.body.id}}

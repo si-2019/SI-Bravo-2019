@@ -1,7 +1,9 @@
+const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
 
 module.exports = (app, db) => {
     
-    app.get('/frequentIssue/get', function(req, res) {
+    app.get('/frequentIssue/get', Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]),  function(req, res) {
         
          db.frequentIssue.findAll().then(rezultat => {
              res.send(rezultat);             
@@ -9,7 +11,7 @@ module.exports = (app, db) => {
     
     });
 
-    app.post('/frequentIssue/add',function(req, res){
+    app.post('/frequentIssue/add', Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
 
         var nazivIssuea = req.query.naziv; 
         var tekstIssuea = req.query.tekst;

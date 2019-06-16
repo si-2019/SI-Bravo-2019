@@ -1,6 +1,9 @@
+const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
+
 module.exports = (app, db) => {
 
-    app.get('/message/get', (req, res) => {
+    app.get('/message/get',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]),  (req, res) => {
         
         let issueID = req.query.issueID;
 
@@ -17,7 +20,7 @@ module.exports = (app, db) => {
         });
     });
 
-    app.post('/message/add', (req,res) => {
+    app.post('/message/add',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]),  (req,res) => {
 
         let issueID = req.query.issueID;
         let messageTekst = req.query.tekst;

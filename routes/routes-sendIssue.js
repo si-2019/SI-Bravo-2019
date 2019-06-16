@@ -1,6 +1,9 @@
+const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
+
 module.exports = (app, db) => {
 
-    app.post('/issue/send/s',function(req, res){
+    app.post('/issue/send/s',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
         db.issueCategory.findOne({where:{naziv:req.query.issueTitle}}).then(kategorija => {
             const noviIssue = db.issue.build({
                 status: "new",
@@ -22,7 +25,7 @@ module.exports = (app, db) => {
         }).catch(error => res.send(error))});
     });
 
-    app.post('/issue/send/ss',function(req, res){
+    app.post('/issue/send/ss', Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
         db.korisnik.findOne({where:{username:req.query.username}}).then(student => {
             if(student != null)
             {

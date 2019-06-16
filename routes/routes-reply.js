@@ -1,6 +1,9 @@
+const Authenticate = require('../services/auth.service')
+const ROLES = Authenticate.ROLES
+
 module.exports = (app, db) => {
 
-    app.post('/issue/reply/student',function(req, res){
+    app.post('/issue/reply/student',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
 
         const newMessage = db.issueMessage.build({
             tekst: req.body.issueText,
@@ -20,7 +23,7 @@ module.exports = (app, db) => {
         );   
     });
 
-    app.post('/issue/reply/SS',function(req, res){
+    app.post('/issue/reply/SS',Authenticate.authenticate([ROLES.STUDENT, ROLES.STUDENTSKA_SLUZBA]), function(req, res){
 
         const newMessage = db.issueMessage.build({
             tekst: req.body.tekst,
